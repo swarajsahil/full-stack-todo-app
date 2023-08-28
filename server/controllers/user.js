@@ -5,7 +5,7 @@ import ErrorHandler from "../middlewares/error.js";
 
 export const register=async(req,res,next)=>{
     try {
-        const {email,password}=req.body;
+        const {username,email,password}=req.body;
     const userData=await user.findOne({email});
     if(userData)
     {
@@ -13,6 +13,7 @@ export const register=async(req,res,next)=>{
     }
         const hassedPassword=await bcrypt.hash(password,10);
         await user.create({
+            username,
             email,
             password:hassedPassword
         })
